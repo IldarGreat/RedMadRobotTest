@@ -1,9 +1,10 @@
 package ru.redmadrobot.red_mad_robot_test.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,14 +22,20 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequestMapping("/api")
 public class LoginController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
+
+    private final AuthenticationManager authenticationManager;
 
     @Value("${application.auth.cookie-name}")
     private String cookieName;
+
+    public LoginController(UserService userService, JwtTokenUtil jwtTokenUtil, AuthenticationManager authenticationManager) {
+        this.userService = userService;
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.authenticationManager = authenticationManager;
+    }
 
     @PostMapping(value = "/registration", consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<?> registration(@RequestBody LoginRecord loginRecord, HttpServletResponse response) {
@@ -39,7 +46,10 @@ public class LoginController {
 
     @PostMapping(value = "/login", consumes = APPLICATION_JSON_VALUE)
     public ResponseEntity<?> login(@RequestBody LoginRecord loginRecord, HttpServletResponse response) {
-        userService.findUser(loginRecord.email());
+        if (loginRecord.email() == null || loginRecord.password() == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRecord.email(), loginRecord.password()));
         response.addCookie(new Cookie(cookieName, jwtTokenUtil.createToken(loginRecord)));
         return new ResponseEntity<>(HttpStatus.OK);
     }

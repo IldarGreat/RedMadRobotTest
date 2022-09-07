@@ -24,6 +24,6 @@ public class User extends BaseEntity {
     @Column
     private Role role;
 
-    @OneToMany
+    @OneToMany(mappedBy="user")
     private List<Advertisement> advertisements;
 }

@@ -16,7 +16,7 @@
     <properties>
         <java.version>18</java.version>
         <testcontainers.version>1.17.3</testcontainers.version>
-        <postgresql.version>42.4.2</postgresql.version>
+        <postgresql.version>42.5.0</postgresql.version>
         <javax.validation.version>2.0.1.Final</javax.validation.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
         <jjwt.version>0.9.1</jjwt.version>
