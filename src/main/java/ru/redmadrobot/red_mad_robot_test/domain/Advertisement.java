@@ -20,9 +20,10 @@ public class Advertisement extends BaseEntity {
     @Column
     private Status status;
     @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
     private User user;
     @Lob
-    @Column(name = "photo", columnDefinition = "BLOB")
+    @Column(columnDefinition = "BLOB")
     private byte[] photo;
 }
 
