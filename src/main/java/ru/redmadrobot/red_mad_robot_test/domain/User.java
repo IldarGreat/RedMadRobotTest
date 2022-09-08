@@ -7,7 +7,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,6 +25,7 @@ public class User extends BaseEntity {
     @Column
     private Role role;
 
-    @OneToMany(mappedBy="user")
+
+    @OneToMany(mappedBy = "user")
     private List<Advertisement> advertisements;
 }

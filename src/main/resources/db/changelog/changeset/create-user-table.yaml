@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-user
+      author: ildar
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created
+                  type: timestamp
+              - column:
+                  name: updated
+                  type: timestamp
+              - column:
+                  name: status
+                  type: varchar(255)
+              - column:
+                  name: email
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: password
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: role
+                  type: varchar(255)
+
