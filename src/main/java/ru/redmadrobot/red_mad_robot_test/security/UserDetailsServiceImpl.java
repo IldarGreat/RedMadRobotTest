@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.redmadrobot.red_mad_robot_test.dto.UserRecord;
+import ru.redmadrobot.red_mad_robot_test.domain.User;
 import ru.redmadrobot.red_mad_robot_test.service.UserService;
 
 import java.util.Set;
@@ -20,8 +20,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserRecord user = userService.findUser(username);
+        User user = userService.findUser(username);
         return new org.springframework.security.core.userdetails.
-                User(user.email(), user.password(), Set.of(new SimpleGrantedAuthority(user.role().toString())));
+                User(user.getEmail(), user.getPassword(), Set.of(new SimpleGrantedAuthority(user.getRole().toString())));
     }
 }

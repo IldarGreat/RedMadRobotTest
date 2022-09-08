@@ -1,7 +1,6 @@
 package ru.redmadrobot.red_mad_robot_test.controllers;
 
 import org.json.JSONObject;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -10,7 +9,6 @@ import ru.redmadrobot.red_mad_robot_test.BaseTest;
 import ru.redmadrobot.red_mad_robot_test.domain.Role;
 import ru.redmadrobot.red_mad_robot_test.domain.User;
 import ru.redmadrobot.red_mad_robot_test.dto.LoginRecord;
-import ru.redmadrobot.red_mad_robot_test.repository.UserRepository;
 import ru.redmadrobot.red_mad_robot_test.service.UserService;
 
 import java.nio.charset.StandardCharsets;
@@ -18,17 +16,8 @@ import java.nio.charset.StandardCharsets;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 public class LoginControllerTests extends BaseTest {
-
-    @Autowired
-    private UserRepository userRepository;
-
     @Autowired
     private UserService userService;
-
-    @BeforeEach
-    public void deleteEntities(){
-        userRepository.deleteAll();
-    }
 
     @Test
     public void registration_thenReturn200() throws Exception {
@@ -77,7 +66,7 @@ public class LoginControllerTests extends BaseTest {
 
     @Test
     public void login_thenReturn200() throws Exception {
-        userService.save(new LoginRecord(Role.NONE_1,"test","password"));
+        userService.save(new LoginRecord(Role.NONE_1, "test", "password"));
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("email", "test");
         jsonObject.put("password", "password");

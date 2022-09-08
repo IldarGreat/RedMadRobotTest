@@ -49,7 +49,7 @@ public class JwtTokenUtil {
                 .before(new Date());
     }
 
-    public String getLogin(String token) {
+    public String getEmail(String token) {
         return Jwts.parser()
                 .setSigningKey(base64Secret)
                 .parseClaimsJws(token)

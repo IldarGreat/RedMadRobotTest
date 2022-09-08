@@ -36,9 +36,8 @@ public class UserServiceImpl implements UserService {
 
     @Transactional(readOnly = true)
     @Override
-    public UserRecord findUser(String email) {
-        return userMapper.toRecord(
-                userRepository.findByEmail(email)
-                        .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found")));
+    public User findUser(String email) {
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " not found"));
     }
 }
