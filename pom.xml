@@ -16,13 +16,19 @@
     <properties>
         <java.version>18</java.version>
         <testcontainers.version>1.17.3</testcontainers.version>
-        <postgresql.version>42.5.0</postgresql.version>
+        <mysql.version>8.0.30</mysql.version>
         <javax.validation.version>2.0.1.Final</javax.validation.version>
         <mapstruct.version>1.5.2.Final</mapstruct.version>
         <jjwt.version>0.9.1</jjwt.version>
         <liquibase.version>4.15.0</liquibase.version>
+        <postgresql.version>42.5.0</postgresql.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
@@ -48,11 +54,6 @@
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <version>${javax.validation.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

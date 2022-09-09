@@ -111,6 +111,21 @@ public class BulletinBoardControllerTests extends BaseTest {
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
 
+    @Test
+    public void getAdvertsWithNotExistingId_thenReturn404() throws Exception {
+        this.mockMvc.perform(get("/api/board/id")
+                        .cookie(validityCookie)
+                        .param("id", "56000"))
+                .andExpect(MockMvcResultMatchers.status().is(404));
+    }
+
+    @Test
+    public void getAdvertsWithBadData_thenReturn400() throws Exception {
+        this.mockMvc.perform(get("/api/board/id")
+                        .cookie(validityCookie)
+                        .param("id", "56dsa000"))
+                .andExpect(MockMvcResultMatchers.status().is(400));
+    }
 
     @Test
     public void getAdvertsByFilter_thenReturn200() throws Exception {
