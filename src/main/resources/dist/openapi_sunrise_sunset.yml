@@ -1,0 +1,288 @@
+openapi: 3.0.0
+info:
+  title: Доска объявление Open API спецификация
+  description: Тестовое задание от red_mad_robot
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080/api
+    description: Dev server
+paths:
+  /board/:
+    get:
+      summary: Метод получения всех объявлений
+      tags:
+        - Board bulletin
+      operationId: getAdvertisements
+      parameters:
+        - name: SESSION
+          in: cookie
+          required: true
+          description: Аутентификация пользователя
+          schema:
+            type: string
+          example: dsafdsdsa78
+      responses:
+        "200":
+          description: Успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Advertisements"
+        "403":
+          description: Нет аутентификации(проверьте свои куки)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /board/id:
+    get:
+      summary: Метод получения объявлений по id
+      tags:
+        - Board bulletin
+      operationId: getAdvertisementById
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: Идентификатор объявления
+          schema:
+            type: integer
+          example: 12
+        - name: SESSION
+          in: cookie
+          required: true
+          description: Аутентификация пользователя
+          schema:
+            type: string
+          example: dsafdsdsa78
+      responses:
+        "200":
+          description: Успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Advertisement"
+        "400":
+          description: В параметры было переданно не число
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Нет аутентификации(проверьте свои куки)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: Обьявление не найдено
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /board/filter:
+    get:
+      summary: Метод получения объявлений по id
+      tags:
+        - Board bulletin
+      operationId: getAdvertisementWithFilter
+      parameters:
+        - name: title
+          in: query
+          required: false
+          description: Название объявления
+          schema:
+            type: string
+          example: Трусы
+        - name: description
+          in: query
+          required: false
+          description: Описание объявления
+          schema:
+            type: string
+          example: Продаю немного поношенные трусы
+        - name: photo
+          in: query
+          required: false
+          description: Есть ли у объявления фото
+          schema:
+            type: boolean
+          example: true
+        - name: SESSION
+          in: cookie
+          required: true
+          description: Аутентификация пользователя
+          schema:
+            type: string
+          example: dsafdsdsa78
+      responses:
+        "200":
+          description: Успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Advertisements"
+        "400":
+          description: В photo было переданно некоректное значение
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: Нет аутентификации(проверьте свои куки)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /board/add:
+    post:
+      summary: Создание нового объявления
+      tags:
+        - Board bulletin
+      operationId: Create advertisment
+      parameters:
+        - name: title
+          in: query
+          required: true
+          description: Название объявления
+          schema:
+            type: string
+          example: Трусы
+        - name: description
+          in: query
+          required: true
+          description: Описание объявления
+          schema:
+            type: string
+          example: Продаю немного поношенные трусы
+        - name: photo
+          in: query
+          required: false
+          description: Есть ли у объявления фото
+          schema:
+            type: boolean
+          example: true
+        - name: SESSION
+          in: cookie
+          required: true
+          description: Аутентификация пользователя
+          schema:
+            type: string
+          example: dsafdsdsa78
+      responses:
+        "200":
+          description: Успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Advertisements"
+  /registration:
+    post:
+      summary: Добавление пользователя в базу данных и возврат JWT в кукисах
+      tags:
+        - Auth
+      operationId: Create new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
+      responses:
+        "200":
+          description: Успешное регистрирование
+          content:
+            application/json:
+              schema:
+                {}
+        "400":
+          description: Ошибка ввода данных(возможно, неправильный json или юзер с такой почтой существует)
+          content:
+            application/json:
+              schema:
+                {}
+  /login:
+    post:
+      summary: Вход в систему с возвращением JWT
+      tags:
+        - Auth
+      operationId: Login in system
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Login"
+      responses:
+        "200":
+          description: Успешное регистрирование
+          content:
+            application/json:
+              schema:
+                {}
+        "400":
+          description: Ошибка ввода данных(возможно, неправильный json или юзер с такой почтой существует)
+          content:
+            application/json:
+              schema:
+                {}
+        "403":
+          description: Такого пользователя не существует
+          content:
+            application/json:
+              schema:
+                {}
+
+
+
+components:
+  schemas:
+    Advertisement:
+      type: object
+      required:
+        - title
+        - description
+      properties:
+        advertisement_id:
+          type: integer
+          example: 12
+        title:
+          type: string
+          example: Автомобиль
+        status:
+          type: string
+          enum:
+            - ACTIVE
+            - NOT_ACTIVE
+        created_at:
+          type: string
+          format: 2022-06-15T13:45:30
+          example: 2022-06-15T13:45:30
+    Advertisements:
+      type: array
+      items:
+        $ref: "#/components/schemas/Advertisement"
+    Error:
+      type: object
+      required:
+        - description
+      properties:
+        description:
+          type: string
+          description: Ошибка
+    Login:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          description: Почта пользователя
+        password:
+          type: string
+          description: Пароль пользователя
+        role:
+          type: string
+          description: Роль пользователя
+
