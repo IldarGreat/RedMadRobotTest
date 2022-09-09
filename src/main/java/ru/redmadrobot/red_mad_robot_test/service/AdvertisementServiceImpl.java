@@ -61,24 +61,6 @@ public class AdvertisementServiceImpl implements AdvertisementService {
             return advertisementMapper.toRecords(advertisementRepository.findByTitle(title));
         }
         return advertisementMapper.toRecords(advertisementRepository.findByTitleAndDescriptionAndPhotoIsNotNull(title, description));
-
-//        if (title == null && description == null && !image) {
-//            return advertisementMapper.toRecords(advertisementRepository.findAll());
-//        }
-//        if (title == null && description != null && !image) {
-//            return advertisementMapper.toRecords(advertisementRepository.findByDescription(description));
-//        } else if (title == null && description == null && image) {
-//            return advertisementMapper.toRecords(advertisementRepository.findByPhotoIsNotNull());
-//        } else if (title == null && description != null && image) {
-//            return advertisementMapper.toRecords(advertisementRepository.findByDescriptionAndPhotoIsNotNull(description));
-//        } else if (title != null && description != null && !image) {
-//            return advertisementMapper.toRecords(advertisementRepository.findByTitleAndDescription(title, description));
-//        } else if (title != null && description == null && image) {
-//            return advertisementMapper.toRecords(advertisementRepository.findByTitleAndPhotoIsNotNull(title));
-//        } else if (title != null && description == null && !image) {
-//            return advertisementMapper.toRecords(advertisementRepository.findByTitle(title));
-//        }
-//        return advertisementMapper.toRecords(advertisementRepository.findByTitleAndDescriptionAndPhotoIsNotNull(title, description));
     }
 
     @Override

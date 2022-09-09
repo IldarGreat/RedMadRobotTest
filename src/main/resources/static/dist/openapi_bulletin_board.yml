@@ -243,21 +243,31 @@ components:
         - title
         - description
       properties:
-        advertisement_id:
+        id:
           type: integer
           example: 12
-        title:
+        created:
           type: string
-          example: Автомобиль
+          format: 2022-06-15T13:45:30
+          example: 2022-06-15T13:45:30
+        updated:
+          type: string
+          format: 2022-06-15T13:45:30
+          example: 2022-07-15T13:45:30
         status:
           type: string
           enum:
             - ACTIVE
             - NOT_ACTIVE
-        created_at:
+        title:
           type: string
-          format: 2022-06-15T13:45:30
-          example: 2022-06-15T13:45:30
+          example: Автомобиль
+        user_id:
+          type: integer
+          example: 12
+        photo:
+          type: string
+          example: link to the photo
     Advertisements:
       type: array
       items:
