@@ -10,16 +10,13 @@
   </ul>
   <h2 id="howinstall">How install and run</h2>
   Beforehand you must have <a href="https://docs.master.dockerproject.org/desktop/install/windows-install/">docker</a>
-  and
-  jdk 17+ <br>
+   <br>
   <pre>
 docker-compose up --build 
-mvn compile & package
-java -jar red_mad_robot_test-0.0.1-SNAPSHOT.jar
 </pre>
   With this command you install the postgresql db, generate the required classes and run the project
   <h2 id = "howuse">How use</h2>
-  After starting the project, you can look at the documentation at /api/documentation <br>
+  After starting the project, you can look at the documentation at localhost:80 <br>
   And page will loks like: <br> <br>
   <img src = "https://user-images.githubusercontent.com/90307025/189490329-44d933da-4b29-4728-955a-b4862492cc33.png" alt = "Open API example">
   <img src = "https://user-images.githubusercontent.com/90307025/189490287-b48be709-3499-4cc4-ad9d-90bdec025ede.png" alt = "Open API example">
@@ -39,7 +36,7 @@ Technology used in the project:
 <h2 id = "problems">Problems</h2>
  <ol>
     <li><strong>3 days to complete project</strong> <br> I had a lack of time to complete the test task, everything writing in a harry and not all the planned functionality was implemented e.gs.<br>1)user communication, but you can see a <a href = "https://github.com/IldarGreat/RedMadRobotTest/issues/5">issue</a> about it<br>2)Displaying code coverage. I wanted to connect jacoco agent</li>
-    <li><strong>JVM</strong><br>My dev environment(IDEA) cannot connect to the postgres db through drivers on my computer, it immediately starts to crash. I found only one person with a similar problem on <a href = "https://youtrack.jetbrains.com/issue/DBE-16172">youtrake</a> and he just changing jvm to version 16 and it help him, but not for me</li>
+    <li><strong>JVM (SOLVED)</strong><br>My dev environment(IDEA) cannot connect to the postgres db through drivers on my computer, it immediately starts to crash. I found only one person with a similar problem on <a href = "https://youtrack.jetbrains.com/issue/DBE-16172">youtrake</a> and he just changing jvm to version 16 and it help him, but not for me</li>
     <li><strong>Roles</strong><br>The text of the task says to write roles to users, although I don't understand why,because all users are equal</li>
   </ol>
   <h2 id = "testtext">Test task text</h2>
