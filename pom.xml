@@ -10,7 +10,7 @@
     </parent>
     <groupId>ru.redmadrobot</groupId>
     <artifactId>red_mad_robot_test</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>red_mad_robot_test</name>
     <description>red_mad_robot_test</description>
     <properties>
@@ -22,8 +22,14 @@
         <jjwt.version>0.9.1</jjwt.version>
         <liquibase.version>4.15.0</liquibase.version>
         <postgresql.version>42.5.0</postgresql.version>
+        <mysql.version>8.0.30</mysql.version>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -122,8 +128,24 @@
                             <artifactId>mapstruct-processor</artifactId>
                             <version>${mapstruct.version}</version>
                         </path>
+
                     </annotationProcessorPaths>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>ru.redmadrobot.red_mad_robot_test.RedMadRobotTestApplication</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

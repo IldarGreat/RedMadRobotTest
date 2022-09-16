@@ -3,9 +3,9 @@ spring:
     enabled: false
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/robots
-    username: root
-    password: admin
+    url: jdbc:postgresql://postgres:5432/password
+    username: password
+    password: password
   jpa:
     generate-ddl: true
     show-sql: true
